@@ -7,13 +7,12 @@ date:   2015-12-23 16:44:00 +0900
 
 ## Github에 Repository 생성
 
-Github에서 웹페이지를 이용하기 위해서는 “블로그명.github.io” 형태로 repository를 생성해야 한다.
+시작은 간단하게 “블로그명.github.io” 형태로 repository를 생성한다. 그 다음 이 repository의 settings로 들어간 후 Launch automatic generator를 선택하여 블로그 템플릿을 지정하면 해당 템플릿이 적용된 index.html 파일이 생성된다.
 
-Github에서 기본적으로 제공하는 템플릿을 이용할 수도 있는데 repository의 settings로 들어간 후 Launch automatic generator를 선택하여 블로그 템플릿을 지정하면 해당 템플릿이 적용된 index.html 파일이 생성된다. 그 이후부터는 repository를 clone 해서 작업한 후 github에 변경 내용을 반영하는 식으로 발전시켜 나가면 된다.
+그 이후부터는 repository를 clone 해서 작업한 후 github에 변경 내용을 반영하는 식으로 발전시켜 나가면 된다.
 
-Github page는 Jekyll을 지원하는데 모든 페이지에 복사할 필요 없이 쉽게 헤더와 푸터를 만들어주기 때문에 중복 작업이 필요없어진다. repository 내의 특별한 이름을 가진 branch에 push를 할 때 Jekyll이 동작한다. User 페이지를 제작하는 경우에는 master를 사용하면 되고, ProjectPage일 경우에는 gh-pages라는 branch를 사용하면 된다.
+Github page는 Jekyll을 지원하는데 모든 페이지에 복사할 필요 없이 쉽게 헤더와 푸터를 만들어준다.  repository 내의 특별한 이름을 가진 branch에 push를 할 때 Jekyll이 동작한다. User 페이지를 제작하는 경우에는 master를 사용하면 되고, ProjectPage일 경우에는 gh-pages라는 branch를 사용하면 된다.
 
-Jekyll을 통한 페이지 작업을 할 때는 로컬에 Jekyll을 설치하면 서버를 띄워서 직접 결과를 확인할 수 있으므로 페이지에 대한 검증 후에 Github에 반영하는 식으로 작업하는 것이 좋다. 아래에서 Jekyll을 로컬에 설치 하고 페이지를 포스팅 하는 방법에 대해 알아본다.
 
 ## 로컬에 [Jekyll] 설치
 
