@@ -4,12 +4,6 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+# 최 용호
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jglovier" %} /
-[jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+ Roi Games에서 서버 개발자로 재직중이며 그동안 c++, c# 위주의 개발을 해왔지만, 현재는 JAVA 개발자로 거듭나기 위해 노력하고 있습니다. 팀의 영향을 많이 받아 최근에는 함수형 프로그래밍에 관심이 생겼고, 자바8과 스칼라에 대해 공부해보려고 합니다. 개인적으로는 프론트엔드에 대해 궁금한 부분들이 있어서 조금씩 공부해보고 있습니다. (우선은 블로그 활성화를 목표로) 
