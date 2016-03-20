@@ -3,7 +3,7 @@ _site
 .jekyll-metadata
 
 Gemfile.lock
-
 logs
-
 start.sh
+*.lock
+test.html

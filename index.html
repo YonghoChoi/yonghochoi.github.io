@@ -2,12 +2,12 @@
 layout: default
 ---
 
-<div class="home">
 
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
+<div class="row" style="margin-bottom: 10em">
+  <div class="col-sm-6 col-sm-offset-1 blog-main">
+    <h3>Posts</h3><br>
+    <ul class="post-list">
+      {% for post in site.posts %}
       <li>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
@@ -15,9 +15,38 @@ layout: default
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
       </li>
-    {% endfor %}
-  </ul>
+      {% endfor %}
+    </ul>
+  </div><!-- /.blog-main -->
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+  <div class="col-sm-4 col-sm-offset-1 blog-sidebar">
+    <div class="ibox float-e-margins">
+      <div>
+        <div class="ibox-content no-padding border-left-right">
+          <img alt="image" class="img-responsive" src="/images/main/profile.JPG">
+        </div>
+        <div class="ibox-content profile-content">
+          <h4><strong>Yongho Choi</strong></h4>
+          <p><i class="fa fa-map-marker"></i> Roi Games, South Korea</p>
+          <h5>
+            About me
+          </h5>
+          <p>
+            Game Developer
+          </p>
+          <div class="user-button">
+            <div class="row">
+              <div class="col-md-6">
+                <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
+              </div>
+              <div class="col-md-6">
+                <button type="button" class="btn btn-default btn-sm btn-block"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Share</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /.blog-sidebar -->
 
-</div>
+</div><!-- /.row -->
