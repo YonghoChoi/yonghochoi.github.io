@@ -4,7 +4,7 @@ description:      This is the develope note during my life for programmer.
 disqus_shortname:
 reading_time:     true # if true, shows the estimated reading time for a post
 words_per_minute: 200
-logo:             images/logo.png # logo visible in the topbar
+logo:             # images/logo.png (logo visible in the topbar)
 # Your site's domain goes here (eg: //mmistakes.github.io, http://mademistakes.com, etc)
 # When testing locally leave blank or use http://localhost:4000
 
@@ -25,20 +25,12 @@ menu:
   - title: 'Categories'
     url: '/categories'
     type: 'categories'
-  - title: 'Favorites'
-    url: '#'
-    submenu:
-      - title: 'Code Highlighter'
-        url: '/intro/code-highlighting-post/'
-      - title: 'Sample Post'
-        url: '/intro/sample-post/'
-
 # Owner/author information
 owner:
   name:           YonghoChoi
   site:           http://www.yongho-choi.com
   avatar:         images/avatar.jpg
-  bio:            "Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice."
+  bio:            I've been working as server programmer in Roigames.
   email:          yongho1037@gmail.com
   # Twitter nick for use in Twitter cards and follow button.
   twitter: yongho42 # if no twitter in this config, the twitter follow button will be removed
