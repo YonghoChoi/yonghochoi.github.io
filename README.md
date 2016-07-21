@@ -13,6 +13,13 @@ $ jekyll new myblog
 $ cd myblog
 ```
 
+### bundler 설치
+
+bundle 명령을 사용하여 서버를 구동시키기 위해서는 bundler의 설치가 필요합니다.
+```
+$ gem install bundler
+```
+
 ### jekyll 구동
 
 jekyll을 구동하면 기본 4000 port로 서버가 오픈됩니다.
@@ -20,5 +27,7 @@ jekyll을 구동하면 기본 4000 port로 서버가 오픈됩니다.
 ```
 $ bundle exec jekyll serve
 ```
+
+구동이 안되는 경우 경로에 한글이 있지는 않은지 확인해주세요. (한글 포함시 error 발생)
 
 [jekyll Installation]: https://jekyllrb.com/docs/installation/
