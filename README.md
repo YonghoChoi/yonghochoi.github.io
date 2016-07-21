@@ -2,7 +2,7 @@
 
 ## 설치
 
- jekyll 기반으로 되어 있기 때문에 jekyll 설치가 선행되어야 합니다.
+ jekyll 기반의 [Neo-HPSTR] 테마를 사용하여 제작되었기 때문에 jekyll 설치가 선행되어야 합니다.
 
 ### jekyll 설치
 
@@ -31,3 +31,4 @@ $ bundle exec jekyll serve
 구동이 안되는 경우 경로에 한글이 있지는 않은지 확인해주세요. (한글 포함시 error 발생)
 
 [jekyll Installation]: https://jekyllrb.com/docs/installation/
+[Neo-HPSTR]: http://aronbordin.com/neo-hpstr-jekyll-theme/
