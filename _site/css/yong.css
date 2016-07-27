@@ -1,0 +1,14 @@
+section {
+    padding: 1em 0;
+    line-height: 170%;
+}
+
+.article-share {
+	margin-top: -3rem;
+}
+
+@media (max-width: 480px) {
+	section, article {
+		text-align: left;
+	}
+}
