@@ -42,6 +42,22 @@ config 네임스페이스 아래의 각각의 노드들은 1MB까지 데이터�
 * Ephemeral znode : 클라이언트가 살아있는 동안만 활성화된다. 주키퍼 앙상블로부터 클라이언트의 연결이 끊어지만 ephemeral znode 역시 자동으로 제거된다. ephemeral znode가 제거되면 다음 적절한 node가 그 위치를 채우게 된다. Ephemeral znode는 리더 선출에서 중요한 역할을 한다.
 * Sequential znode : Sequential znode는 persistent가 될 수도 있고, ephemeral이 될 수도 있다. 새로운 znode가 sequntial znode로 생성되었다면 주키퍼는 원래 이름에 10진수를 추가하여 znode의 경로를 set한다. 예를 들어 znode의 경로가 /myapp인 sequential znode가 생성되었다면 주키퍼는 이 경로를 /myapp0000000001로 변경할 것이고 다음 sequence number를 0000000002로 설정할 것이다. 두 sequential znode들이 동시에 생성될 경우라도 주키퍼는 절대 같은 번호를 사용하지 않는다. sequential znode는 Locking과 Synchroniztion에서 중요한 역할을 한다.
 
+### Stat
+
+zxid는 주키퍼의 Transaction ID로써 주키퍼의 모든 상태 변화를 zxid 형식으로 기록한다.
+
+* czxid : znode가 생성됨으로써 변경된 zxid.
+* mzxid : znode가 마지막으로 수정된 zxid.
+* pzxid : znode의 children이 마지막으로 수정된 시간.
+* ctime : znode가 생성된 milliseconds 단위의 시간.(epoch)
+* mtime : znode가 마지막으로 변경되었을 때의 milliseconds 단위의 시간.(epoch)
+* version : znode의 데이터를 위한 갱신 번호.
+* cversion : znode의 children의 데이터를 위한 갱신 번호.
+* aversion : znode의 ACL을 위한 갱신 번호.
+* ephemeralOwner : znode가 ephemeral node일 경우에 이 znode 소유자의 session ID. ephemeral node가 아닐 경우에는 zero가 셋팅된다.
+* dataLength : znode의 data 필드의 길이.
+* numChildren : znode의 children 수.
+
 ### Sessions
 
 세션은 주키퍼의 매우 중요한 operation이다. 하나의 session 내 Request들은 FIFO 순으로 실행된다. 하나의 클라이언트가 처음 서버로 연결될 때 세션은 established 상태가 되고 하나의 session id를 발급받는다.
