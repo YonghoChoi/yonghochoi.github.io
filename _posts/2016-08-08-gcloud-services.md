@@ -52,6 +52,24 @@ tags: [google cloud]
 
 앱 엔진 요소들의 모든 리스트와 설명을 보고 싶다면 [App Engine Documentation]을 참고 한다.
 
+### 컨테이너
+
+컨테이너 기반 컴퓨팅으로 사용자는 호스팅 환경으로 배포와 통합 작업을 신경쓰지 않고 사용자의 어플리케이션 코드에 집중할 수 있다. 구글 컨테이너 엔진은 클라우드 플랫폼의 공개된 클라우드 인프라스트럭쳐일 뿐만 아니라 on-premise(어플리케이션을 로컬 PC에 설치하고 실행. SaaS와 반대 개념)나 하이브리드 클라우드(public서버와 private 서버를 혼합해서 사용)의 유연함을 주는 오픈소스인 [Kubernetes]로 제작되었다.
+
+컨테이너 엔진으로 빌드할 때 다음과 같은 사항들을 할 수 있다.
+
+* 쿠버네이트에서 동작 중인 컴퓨터 엔진 인스턴스의 그룹들([클러스터])을 생성하고 관리할 수 있다. 컨테이너 엔진은 클러스터 내에서 컴퓨트 엔진 인스턴스들을 [노드]로 사용한다. 각 노드들은 노드의 상태를 모니터링 하는 [Kubelet] 에이전트와 간단한 네트워크 프록시를 가진 도커 위에서 동작한다.
+
+* 간단한 JSON 형식의 설정파일을 작성하는 것으로 사용자의 도커 컨테이너에 대한 필요사항들을 정의할 수 있다.
+
+* 도커 이미지들의 비공개 스토리지인 안심할 수 있는 구글 컨테이너 레지스트리를 사용할 수 있다. 사용자는 자신의 [레지스트리에 이미지들을 push] 할 수 있다. 그리고 나서 컴퓨트 엔진 인스턴스나 HTTP endpoint를 사용하는 사용자 소유의 하드웨어에서 이미지들을 pull 할 수 있다.
+
+* 하나 또는 여러개의 컨테이너를 의미하는 [pod]을 생성할 수 있다. 각 pod들은 하나 또는 더 많은 컨테이너들을 포함할 수 있는 논리적인 호스트를 의미한다. 하나의 pod 내의 컨테이너들은 네트워킹 리소스와 같은 리소스들을 공유하는 것으로서 함께 작업한다. pod들의 한 셋트는 다계층 어플리케이션 내에서 하나의 어플리케이션 전체나 하나의 마이크로 서비스나 하나의 레이어로 구성될 것이다. 템플릿에서 pod의 복제품 기반의 생성과 삭제를 관리하는 [replication controller]를 생성하고 관리할 수 있다. Replication Controller는 사용자의 어플리케이션이 신뢰할 수 있게 동작하고 적당하게 확장할 수 있는 리소스들을 가지는 것을 보장하는데 도움이 된다.
+
+* [서비스]를 생성하고 관리할 수 있다. 서비스는 백엔드 함수에서 제공하는 pod이 프론트엔드 클라이언트와 분리되도록 하나의 추상 레이어를 생성한다. 이렇게 해서 클라이언트는 어떤 순간에 pod들이 생성되고 제거되는지에 대해 생각할 필요 없이 작업할 수 있다.
+
+* 외부 네트워크 로드밸런서를 생성할 수 있다.
+
 [상품과 서비스 페이지]: https://cloud.google.com/products/
 [standard environment]: https://cloud.google.com/appengine/docs/about-the-standard-environment
 [flexible environment]: https://cloud.google.com/appengine/docs/flexible/
@@ -64,3 +82,11 @@ tags: [google cloud]
 [Cloud Endpoints]: https://cloud.google.com/appengine/docs/about-the-standard-environment#Endpoints
 [Cloud Security Scanner]: https://cloud.google.com/security-scanner/
 [App Engine Documentation]: https://cloud.google.com/appengine/docs
+[Kubernetes]: http://kubernetes.io/docs/whatisk8s/
+[클러스터]: https://cloud.google.com/container-engine/docs/clusters/
+[노드]: https://cloud.google.com/container-engine/docs/clusters/#nodes
+[Kubelet]: http://kubernetes.io/docs/admin/kubelet/
+[레지스트리에 이미지들을 push]: https://cloud.google.com/tools/container-registry/#pushing_to_the_registry
+[pod]: http://kubernetes.io/docs/user-guide/pods/#what_is_a_pod
+[replication controller]: http://kubernetes.io/docs/user-guide/replication-controller/
+[서비스]: http://kubernetes.io/docs/user-guide/services/

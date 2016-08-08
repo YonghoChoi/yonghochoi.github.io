@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Google Cloud Overview"
+title:  "Google Cloud Concept"
 date:   2016-08-04 23:50:00 +0900
 tags: [google cloud]
 ---
