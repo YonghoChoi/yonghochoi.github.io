@@ -70,6 +70,10 @@ tags: [google cloud]
 
 * 외부 네트워크 로드밸런서를 생성할 수 있다.
 
+### 가상 머신
+
+구글 Compute 엔진은 클라우드 플랫폼에서 관리되지 않는 compute 서비스 이다. 이 시스템은 견고한 컴퓨팅 인프라스트력쳐를 제공하기 때문에 하나의 서비스 처럼 인프라스트럭쳐를 제공하는 것(IaaS)으로 컴퓨트 엔진을 생각할 수 있다. 하지만 사용자가 사용하길 원하는 플랫폼의 컴포넌트들을 선택하고 설정해야만 한다. Compute 엔진은 configure, administrator, monitor를 위한 역할을 한다. 구글은 리소스들을 사용자들이 사용할 수 있게 가용성, 신뢰성, 준비성은 보장하지만 공급하고 관리하는 것은 사용자에게 달려있다. 
+
 [상품과 서비스 페이지]: https://cloud.google.com/products/
 [standard environment]: https://cloud.google.com/appengine/docs/about-the-standard-environment
 [flexible environment]: https://cloud.google.com/appengine/docs/flexible/
