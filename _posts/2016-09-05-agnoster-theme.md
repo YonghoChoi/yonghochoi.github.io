@@ -21,9 +21,9 @@ Agnoster 테마를 적용하면 터미널에 글자가 깨져서 출력이 되�
 
 6. 홈디렉토리에서 .zshrc 파일을 열어서 테마를 변경한다.
 
-   ```shell
-   ZSH_THEME="agnoster"
-   ```
+```
+ZSH_THEME="agnoster"
+```
 
 7. 터미널을 재시작하면 설치 완료!
 
