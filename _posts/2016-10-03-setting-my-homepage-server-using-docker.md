@@ -7,17 +7,21 @@ tags: [docker]
 
 기존에 AWS에 올려두었던 개인 포트폴리오 홈페이지 서버를 구글 클라우드를 공부할 겸 옮기기로 결정했다. 막상 옮기려니 오래전에 셋팅해두었던 서버여서 잘 기억도 나지 않고 당시 가이드 문서도 상세히 적어놓지 않아서 새로 구축하기가 번거로웠다. 그래서 이 참에 docker 환경으로 구성해서 다음번에 이전을 할 일이 생기더라도 간편하게 서버를 구축할 수 있도록 하기로 마음먹게 되었다.
 
+
+
 먼저 nginx를 제외하고 tomcat과 jenkins에 대해서만 생각을 하기로 하고 설계를 했다.
 
 
-![](http://yonghochoi.github.io/images/docker/homepage_architect.png)
+
+![](C:\Users\yongssol\Documents\homepage_architect.png)
 
 먼저 홈페이지 서버와 jenkins 서버를 docker 이미지로 만든 후 Docker Hub의 내 개인 계정에 push를 해 두었다. jenkins 서버 이미지를 만들면서 삽질을 많이 했었다. Docker hub에 official로 올라가 있는 jenkins를 받아서 사용을 했었는데,  jenkins에 item을 만들어서 설정을 완료하고 commit을 하여 새로운 이미지를 만들면 다음 번에 이 이미지를 사용하여 컨테이너를 생성했을 때 내용이 그대로 남아있을 것이라고 생각했는데, 초기화 되는 것이었다. 이 문제 때문에 몇 일간 삽질을 했었다. Dockerfile을 자세히 들여다 보니 jenkins의 홈 디렉토리인 /var/jenkins_home 디렉토리가 VOLUME으로 지정되어 있었다. 볼륨으로 사용할 경우 호스트의 디렉토리와 매핑이 되기 때문에 컨테이너의 변경 사항이 반영되지 않는다. 그래서 내린 결론은 ubuntu 서버에 직접 톰캣과 젠킨스를 wget으로 받아서 서버를 구축하고 이미지로 만들자는 것이었다.
 
 
+
 * Jenkins 서버의 Dockerfile
 
-  ```
+  {% highlight shell %}
   FROM ubuntu:14.04
 
   MAINTAINER Yongho Choi <yongho1037@gmail.com>
@@ -73,14 +77,14 @@ tags: [docker]
 
   # Launch Tomcat
   CMD ["/opt/tomcat/bin/catalina.sh", "run"]
-  ```
+  {% endhighlight %}
 
   ​
 
 
 * 홈페이지(tomcat) 서버의 Dockerfile
 
-  ```
+  {% highlight shell %}
   FROM ubuntu:14.04                                                               
   MAINTAINER Yongho Choi <yongho1037@gmail.com>                                                                                                                
   ENV TOMCAT_VERSION 8.0.37                                                                                                                                    
@@ -123,7 +127,7 @@ tags: [docker]
 
   # Launch Tomcat                                                                 
   CMD ["/opt/tomcat/bin/catalina.sh", "run"]
-  ```
+  {% endhighlight %}
 
 
 
@@ -133,7 +137,7 @@ tags: [docker]
 
 * docker-compose.yml
 
-  ```
+  {% highlight shell %}
   version: '2'                 
   services:                    
     jenkins:                   
@@ -147,7 +151,7 @@ tags: [docker]
       ports:                   
        - "80:8080"
        - "2222:22"
-  ```
+  {% endhighlight %}
 
 
 
@@ -161,25 +165,25 @@ tags: [docker]
 
 * sshd 설치
 
-  ```shell
+  {% highlight shell %}
   $ apt-get update && apt-get upgrade && apt-get install -y openssh-server
-  ```
+  {% endhighlight %}
 
   * apt-get updpate가 되어있지 않으면 설치가 안됨
 
 * /var/run/sshd 디렉토리 생성
 
-  ```shell
+  {% highlight shell %}
   $ mkdir /var/run/sshd
-  ```
+  {% endhighlight %}
 
   * 해당 디렉토리가 존재하지 않으면 "Missing privilege separation directory: /var/run/sshd" 에러가 발생한다.
 
 * 실행
 
-  ```shell
+  {% highlight shell %}
   $ /usr/sbin/sshd -D
-  ```
+  {% endhighlight %}
 
 
 
@@ -189,14 +193,14 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 
 * sshd 설치 내용 Dockerfile에 반영
 
-  ```
+  {% highlight shell %}
   RUN apt-get update && apt-get upgrade \
       && apt-get -y install openssh-server
 
   RUN mkdir /var/run/sshd
 
   CMD ["/usr/sbin/sshd", "-D"]
-  ```
+  {% endhighlight %}
 
 
 
@@ -206,13 +210,13 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 
 * 유저 계정 관련 내용 Dockerfile에 반영
 
-  ```
+  {% highlight shell %}
   RUN adduser --disabled-password --gecos "" <계정명> \
       && echo '<계정명>:<패스워드>' | chpasswd \
       && mkdir <작업디렉토리>
 
   RUN chown -R <계정명>:<계정명> <작업디렉토리>
-  ```
+  {% endhighlight %}
 
 
 
@@ -222,7 +226,7 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 
 * 갱신된 Dockerfile
 
-  ```
+  {% highlight shell %}
   FROM ubuntu:14.04
 
   MAINTAINER Yongho Choi <yongho1037@gmail.com>
@@ -289,7 +293,7 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 
   # Launch sshd
   CMD ["/usr/sbin/sshd", "-D"]
-  ```
+  {% endhighlight %}
 
 
 
@@ -307,5 +311,3 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 
 
 설치과정을 제외한 설정만 보면 5분도 걸리지 않을 작업들만 남는다. 앞으로 개선사항으로는 tomcat 서버 앞단에 nginx 서버를 두어 로드밸런싱 및 암호화 적용을 하고, database 서버도 구축하여 기능을 개선하면 좋을 것 같다. (nginx와 database도 마찬가지로 docker로 구성.)
-
-.
