@@ -297,7 +297,7 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 
 ## 마치며
 
-이제 모든 설정은 마무리 되었고, docker-compose.yml 파일만으로 홈페이지 서버를 구축할 수 있었다. 현재는 완전한 자동화는 아니지만 해야할 일이 거의 없으므로 이 전에 비해서는 훨씬 편리해졌다.
+이제 모든 설정은 마무리 되었고, docker-compose.yml 파일만으로 [내 개인 홈페이지] 서버 환경을 구축할 수 있었다. 현재는 완전한 자동화는 아니지만 해야할 일이 거의 없으므로 이 전에 비해서는 훨씬 편리해졌다.
 
 
 해야 할일을 요약하면
@@ -307,6 +307,17 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 3. tomcat server의 패스워드 변경
 4. jenkins 설정에서 ssh ip 변경
 
-
-
 설치과정을 제외한 설정만 보면 5분도 걸리지 않을 작업들만 남는다. 앞으로 개선사항으로는 tomcat 서버 앞단에 nginx 서버를 두어 로드밸런싱 및 암호화 적용을 하고, database 서버도 구축하여 기능을 개선하면 좋을 것 같다. (nginx와 database도 마찬가지로 docker로 구성.)
+
+## Tip
+
+이번 작업을 진행하면서 Github의 Project 기능을 사용해봤는데, 작업 관리하는데 만족스러웠다. 진행 예정인 작업들과 진행 중인 작업 내용들을 칸반 형태로 작성하고 이리저리 옮겨가며 작업 상황을 기록할 수 있어서 우선순위를 정하거나 진행상황을 한눈에 볼 수 있었고, 이슈화 시켜서 조금더 세부적인 사항들을 정리할 수 있었다.
+
+* Github Projects 기능
+![](http://yonghochoi.github.io/images/docker/github_projects.png)
+
+* Github Issues 기능
+![](http://yonghochoi.github.io/images/docker/github_issues.png)
+
+
+[내 개인 홈페이지]: http://yongho-choi.com
