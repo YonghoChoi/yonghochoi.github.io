@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Docker를 활용하여 개인 홈페이지 서버 구축"
+title:  "Docker 활용기 - 개인 홈페이지 서버 환경 구축"
 date:   2016-10-03 17:30:00 +0900
 tags: [docker]
 ---
@@ -8,15 +8,15 @@ tags: [docker]
 기존에 AWS에 올려두었던 개인 포트폴리오 홈페이지 서버를 구글 클라우드를 공부할 겸 옮기기로 결정했다. 막상 옮기려니 오래전에 셋팅해두었던 서버여서 잘 기억도 나지 않고 당시 가이드 문서도 상세히 적어놓지 않아서 새로 구축하기가 번거로웠다. 그래서 이 참에 docker 환경으로 구성해서 다음번에 이전을 할 일이 생기더라도 간편하게 서버를 구축할 수 있도록 하기로 마음먹게 되었다.
 
 
+## Docker 이미지 만들기
 
 먼저 nginx를 제외하고 tomcat과 jenkins에 대해서만 생각을 하기로 하고 설계를 했다.
 
+![](http://yonghochoi.github.io/images/docker/homepage_architect.png)
 
+먼저 홈페이지 서버와 jenkins 서버를 docker 이미지로 만든 후 Docker Hub의 내 개인 계정에 push를 했다. 이 과정에서 jenkins 서버 이미지를 만들며 삽질을 많이 했었다. Docker hub에 official로 올라가 있는 jenkins를 받아서 사용을 했었는데,  jenkins에 item을 만들어서 설정을 완료하고 commit을 하여 새로운 이미지를 만들면 다음 번에 이 이미지를 사용하여 컨테이너를 생성했을 때 내용이 그대로 남아있을 것이라고 생각했는데 초기화 되는 것이었다.
 
-![](C:\Users\yongssol\Documents\homepage_architect.png)
-
-먼저 홈페이지 서버와 jenkins 서버를 docker 이미지로 만든 후 Docker Hub의 내 개인 계정에 push를 해 두었다. jenkins 서버 이미지를 만들면서 삽질을 많이 했었다. Docker hub에 official로 올라가 있는 jenkins를 받아서 사용을 했었는데,  jenkins에 item을 만들어서 설정을 완료하고 commit을 하여 새로운 이미지를 만들면 다음 번에 이 이미지를 사용하여 컨테이너를 생성했을 때 내용이 그대로 남아있을 것이라고 생각했는데, 초기화 되는 것이었다. 이 문제 때문에 몇 일간 삽질을 했었다. Dockerfile을 자세히 들여다 보니 jenkins의 홈 디렉토리인 /var/jenkins_home 디렉토리가 VOLUME으로 지정되어 있었다. 볼륨으로 사용할 경우 호스트의 디렉토리와 매핑이 되기 때문에 컨테이너의 변경 사항이 반영되지 않는다. 그래서 내린 결론은 ubuntu 서버에 직접 톰캣과 젠킨스를 wget으로 받아서 서버를 구축하고 이미지로 만들자는 것이었다.
-
+ 이 문제 때문에 몇 일간 삽질을 했다. Dockerfile을 자세히 들여다보니 jenkins의 홈 디렉토리인 /var/jenkins_home 디렉토리가 VOLUME으로 지정되어 있었다. 볼륨으로 사용할 경우 호스트의 디렉토리와 매핑이 되기 때문에 컨테이너의 변경 사항이 반영되지 않는다. 그래서 내린 결론은 ubuntu 서버에 직접 톰캣과 젠킨스를 wget으로 받아서 서버를 구축하고 이미지로 만들자는 것이었다.
 
 
 * Jenkins 서버의 Dockerfile
@@ -79,8 +79,6 @@ tags: [docker]
   CMD ["/opt/tomcat/bin/catalina.sh", "run"]
   {% endhighlight %}
 
-  ​
-
 
 * 홈페이지(tomcat) 서버의 Dockerfile
 
@@ -130,6 +128,7 @@ tags: [docker]
   {% endhighlight %}
 
 
+## docker-compose 활용
 
 이 후 두 개의 컨테이너를 따로 구동 시키지 않고 한번에 관리하기 위해 docker-compose를 사용하였다. 생각보다 쉽게 구성을 할 수 가 있었는데, docker-compose.yml만 작성하면 여러 개의 docker 컨테이너를 구동시킬 수가 있고, docker 간 통신을 위한 links를 설정할수도 있다.
 
@@ -157,10 +156,11 @@ tags: [docker]
 
 처음에는 image 대신 build를 사용하여 Dockerfile로 컨테이너를 생성했었는데, Dockerfile을 따로 보관해야 하는 불편함이 있어서 Docker Hub에 올린 뒤 image를 사용해서 컨테이너를 생성했다.  
 
-여기서 발생한 이슈는 jenkins 설정 정보를 이미지화 하면 이 이미지에 계정정보와 배포하려는 서버의 각종 정보들이 그대로 남게 된다는 것이었는데, Docker Hub에서 무료로 개인 계정으로 사용할 수 있는 private repository가 1개 주어지므로 이를 활용하기로 했다. 그래서 jenkins는 private repository를 사용하고, 홈페이지 서버는 톰캣만 wget으로 받아서 구동시켜놓은 상태로 public repository로 만들었다
+여기서 발생한 이슈는 jenkins 설정 정보를 이미지화 하면 이 이미지에 계정정보와 배포하려는 서버의 각종 정보들이 그대로 남게 된다는 것이었는데, Docker Hub에서 무료로 개인 계정으로 사용할 수 있는 private repository가 1개 주어지므로 이를 활용하기로 했다. 그래서 jenkins는 private repository를 사용하고, 홈페이지 서버는 톰캣만 wget으로 받아서 구동시켜놓은 상태로 public repository로 만들었다.
+
+## ssh를 통해 젠킨스에서 홈페이지(tomcat) 서버로 배포
 
 위의 .yml 파일에서 tomcat 서버에 ssh port를 따로 포워딩 한 이유는 jenkins에서 ssh를 통해 배포할 때 links에 설정한 이름으로 연결이 될 것으로 생각했었는데, 연결할 수가 없었다. 방법이 잘못 되어서 그런 것일 수도 있기 때문에 더 찾아봐야겠지만 우선은 ssh port를 열고 이를 통해 배포를 하도록 설정했다.  이 과정에서도 한가지 이슈가 있었는데 기본적으로 서버 이미지에 sshd가 설치되어 있지 않아서 연결 할 수가 없었다.
-
 
 
 * sshd 설치
@@ -295,10 +295,9 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
   CMD ["/usr/sbin/sshd", "-D"]
   {% endhighlight %}
 
-
+## 마치며
 
 이제 모든 설정은 마무리 되었고, docker-compose.yml 파일만으로 홈페이지 서버를 구축할 수 있었다. 현재는 완전한 자동화는 아니지만 해야할 일이 거의 없으므로 이 전에 비해서는 훨씬 편리해졌다.
-
 
 
 해야 할일을 요약하면
