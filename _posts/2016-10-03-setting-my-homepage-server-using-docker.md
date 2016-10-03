@@ -302,7 +302,7 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 
 해야 할일을 요약하면
 
-1. docker-engine 설치
+1. [docker 설치]
 2. docker-compose.yml을 이용하여 도커 컨테이너를 생성
 3. tomcat server의 패스워드 변경
 4. jenkins 설정에서 ssh ip 변경
@@ -323,3 +323,4 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 
 
 [내 개인 홈페이지]: http://yongho-choi.com
+[docker 설치]: https://docs.docker.com/engine/installation/linux/ubuntulinux/
