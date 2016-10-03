@@ -311,13 +311,15 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 
 ## Tip
 
-이번 작업을 진행하면서 Github의 Project 기능을 사용해봤는데, 작업 관리하는데 만족스러웠다. 진행 예정인 작업들과 진행 중인 작업 내용들을 칸반 형태로 작성하고 이리저리 옮겨가며 작업 상황을 기록할 수 있어서 우선순위를 정하거나 진행상황을 한눈에 볼 수 있었고, 이슈화 시켜서 조금더 세부적인 사항들을 정리할 수 있었다.
+이번 작업을 진행하면서 Github의 Project 기능을 사용해봤는데, 작업 관리하는데 굉장히 만족스러웠다. 해당 프로젝트 관련 이슈사항들이 한곳에 몰리기 때문에 편리하기도 했고 재미 있기도 했다.
+
+진행 예정인 작업들과 진행 중인 작업 내용들을 칸반 형태로 작성하고 이리저리 옮겨가며 작업 상황을 기록할 수 있어서 우선순위를 정하거나 진행상황을 한눈에 볼 수 있었고, 이슈화 시켜서 조금더 세부적인 사항들을 정리할 수 있었다.
 
 * Github Projects 기능
-![](http://yonghochoi.github.io/images/docker/github_projects.png)
+![](http://yonghochoi.github.io/images/docker/github-projects.png)
 
 * Github Issues 기능
-![](http://yonghochoi.github.io/images/docker/github_issues.png)
+![](http://yonghochoi.github.io/images/docker/github-issues.png)
 
 
 [내 개인 홈페이지]: http://yongho-choi.com
