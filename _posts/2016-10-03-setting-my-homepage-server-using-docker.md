@@ -149,7 +149,6 @@ tags: [docker]
       image: yonghochoi/tomcat
       ports:                   
        - "80:8080"
-       - "2222:22"
   {% endhighlight %}
 
 
@@ -160,7 +159,7 @@ tags: [docker]
 
 ## ssh를 통해 젠킨스에서 홈페이지(tomcat) 서버로 배포
 
-위의 .yml 파일에서 tomcat 서버에 ssh port를 따로 포워딩 한 이유는 jenkins에서 ssh를 통해 배포할 때 links에 설정한 이름으로 연결이 될 것으로 생각했었는데, 연결할 수가 없었다. 방법이 잘못 되어서 그런 것일 수도 있기 때문에 더 찾아봐야겠지만 우선은 ssh port를 열고 이를 통해 배포를 하도록 설정했다.  이 과정에서도 한가지 이슈가 있었는데 기본적으로 서버 이미지에 sshd가 설치되어 있지 않아서 연결 할 수가 없었다.
+위의 .yml 파일에서 tomcat 서버에 ssh port를 따로 포워딩 할 필요 없이 jenkins에서 links에 정의한 이름으로 연결할 수가 있다. "tomcat:homepage-server" 와 같이 alias도 가능하다. 이 과정에서도 한가지 이슈가 있었는데 기본적으로 서버 이미지에 sshd가 설치되어 있지 않아서 tomcat server에 연결 할 수가 없었다.
 
 
 * sshd 설치
@@ -305,7 +304,7 @@ sshd를 설치하는 내용을 추가하기 위해 Dockerfile을 수정하고 �
 1. [docker 설치]
 2. docker-compose.yml을 이용하여 도커 컨테이너를 생성
 3. tomcat server의 패스워드 변경
-4. jenkins 설정에서 ssh ip 변경
+4. jenkins 설정에서 변경된 tomcat server의 패스워드 반영
 
 설치과정을 제외한 설정만 보면 5분도 걸리지 않을 작업들만 남는다. 앞으로 개선사항으로는 tomcat 서버 앞단에 nginx 서버를 두어 로드밸런싱 및 암호화 적용을 하고, database 서버도 구축하여 기능을 개선하면 좋을 것 같다. (nginx와 database도 마찬가지로 docker로 구성.)
 
