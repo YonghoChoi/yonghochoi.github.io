@@ -91,14 +91,14 @@ $ openssl rsautl -decrypt -inkey private.pem -in encrypttext.ssl -out decrypttex
 1. 서버에서 인증기관으로 인증서 요청.
 2. 인증 기관에서는 인증 정보와 함께 서버의 public key를 인증기관의 private key로 암호화하여 인증서 제작
 3. 만들어진 인증서를 서버에 전달.
-4. 클라이언트에서 사용하는 브라우저에는 각 인증기관의 public key가 내장되어 있다.
-5. 브라우저에서 서버로 접속 요청
-6. 서버에서는 인증기관으로 부터 발급받은 인증서를 브라우저에 전달
-7. 브라우저에서 내장되어 있는 해당 인증기관의 public key로 인증서를 복호화.
-8. 클라이언트는 해당 도메인의 인증 정보와 서버의 public key를 획득한다.
-9. 대칭키를 생성한 후 획득한 서버의 public key로 암호화하여 서버에 전달한다.
-10. 서버의 public key로 암호화된 data 이므로 private key를 사용하여 복호화하여 대칭키를 획득한다.
-11. 브라우저와 서버가 동일한 대칭키를 획득하게 되었으므로 이 후 통신은 대칭키 암호화 방식으로 수행한다.
+  * 클라이언트에서 사용하는 브라우저에는 각 인증기관의 public key가 내장되어 있다.
+4. 브라우저에서 서버로 접속 요청
+5. 서버에서는 인증기관으로 부터 발급받은 인증서를 브라우저에 전달
+6. 브라우저에서 내장되어 있는 해당 인증기관의 public key로 인증서를 복호화.
+7. 클라이언트는 해당 도메인의 인증 정보와 서버의 public key를 획득한다.
+8. 대칭키를 생성한 후 획득한 서버의 public key로 암호화하여 서버에 전달한다.
+9. 서버의 public key로 암호화된 data 이므로 private key를 사용하여 복호화하여 대칭키를 획득한다.
+10. 브라우저와 서버가 동일한 대칭키를 획득하게 되었으므로 이 후 통신은 대칭키 암호화 방식으로 수행한다.
 
 
 
@@ -107,7 +107,7 @@ $ openssl rsautl -decrypt -inkey private.pem -in encrypttext.ssl -out decrypttex
 
 ## StartSSL을 사용하여 인증서 만들기
 
-인증기관으로부터 인증서를 발급받아 사용하려면 그에 따른 비용이 발생하게 되는데, StartSSL은 무료이면서 대부분의 브라우저에서 지원을 하고 있다.
+인증기관으로부터 인증서를 발급받아 사용하려면 그에 따른 비용이 발생하게 되는데, StartSSL은 무료이면서 대부분의 브라우저에서 지원을 하고 있다. 여기서 인증서를 만드는 과정은 위의 1~10 단계 가운데 1~3단계에 해당한다.
 
 ### 가입
 
@@ -156,7 +156,7 @@ $ openssl rsautl -decrypt -inkey private.pem -in encrypttext.ssl -out decrypttex
 * openssl을 사용하여 private 키 생성
 
   {% highlight shell %}
-  $ openssl req -newkey rsa:2048 -keyout username.key -out username.csr
+  $ openssl req -newkey rsa:2048 -keyout yourname.key -out yourname.csr
   {% endhighlight %}
 
 * .crt 파일과 .key 파일이 생성되는데 crt 파일의 내용을 등록한다.
@@ -169,10 +169,10 @@ $ openssl rsautl -decrypt -inkey private.pem -in encrypttext.ssl -out decrypttex
 
 * 최종 생성된 인증 관련 파일들
 
-  * username.key : 서버쪽 비공개 키
-  * username.crt : SSL 디지털 인증서
-    * 인증서와 username.key(private key)로 생성한 public key가 포함되어 있음.
-  * username.pem : ROOT CA 인증서
+  * yourname.key : 서버쪽 비공개 키
+  * yourname.crt : SSL 디지털 인증서
+    * 인증서와 yourname.key(private key)로 생성한 public key가 포함되어 있음.
+  * yourname.pem : ROOT CA 인증서
   * intermediate.pem : 중계자 인증서
 
 * 이 후 인증 관련 파일들을 Apache나 nginx와 같은 웹서버에 셋팅하여 https 프로토콜을 사용할 수 있다.
