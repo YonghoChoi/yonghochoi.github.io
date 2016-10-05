@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "StartSSL을 사용하여 인증서 생성하기"
+title:  "StartSSL을 통한 인증서 생성"
 date:   2016-10-03 17:30:00 +0900
 tags: [security]
 ---
@@ -105,7 +105,7 @@ $ openssl rsautl -decrypt -inkey private.pem -in encrypttext.ssl -out decrypttex
 
 
 
-## StartSSL을 사용하여 인증서 만들기
+## StartSSL을 통해 인증서 만들기
 
 인증기관으로부터 인증서를 발급받아 사용하려면 그에 따른 비용이 발생하게 되는데, StartSSL은 무료이면서 대부분의 브라우저에서 지원을 하고 있다. 여기서 인증서를 만드는 과정은 위의 1~10 단계 가운데 1~3단계에 해당한다.
 
