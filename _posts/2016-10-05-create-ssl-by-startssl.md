@@ -5,7 +5,7 @@ date:   2016-10-03 17:30:00 +0900
 tags: [security]
 ---
 
-## SSL
+## 간략한 사전 지식
 
 ###  대칭키 암호화
 
@@ -107,6 +107,8 @@ $ openssl rsautl -decrypt -inkey private.pem -in encrypttext.ssl -out decrypttex
 
 ## StartSSL을 사용하여 인증서 만들기
 
+인증기관으로부터 인증서를 발급받아 사용하려면 그에 따른 비용이 발생하게 되는데, StartSSL은 무료이면서 대부분의 브라우저에서 지원을 하고 있다.
+
 ### 가입
 
 * https://startssl.com/ 로 접속
@@ -165,10 +167,12 @@ $ openssl rsautl -decrypt -inkey private.pem -in encrypttext.ssl -out decrypttex
 
   ![](http://yonghochoi.github.io/images/security/startssl_9.png)
 
-* 최종 생성된 인증관련 파일들
+* 최종 생성된 인증 관련 파일들
 
   * username.key : 서버쪽 비공개 키
   * username.crt : SSL 디지털 인증서
     * 인증서와 username.key(private key)로 생성한 public key가 포함되어 있음.
   * username.pem : ROOT CA 인증서
   * intermediate.pem : 중계자 인증서
+
+* 이 후 인증 관련 파일들을 Apache나 nginx와 같은 웹서버에 셋팅하여 https 프로토콜을 사용할 수 있다.
