@@ -2,7 +2,7 @@
 layout: post
 title:  "Windows에서 cmder로 docker terminal 사용"
 date:   2017-01-02 19:16:00 +0900
-tags: [security]
+tags: [docker]
 ---
 
 ## 사전 준비
